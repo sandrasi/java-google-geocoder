@@ -1,0 +1,50 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.github.sandrasi</groupId>
+        <artifactId>geocoder-parent</artifactId>
+        <version>1.0</version>
+    </parent>
+
+    <artifactId>geocoder-google</artifactId>
+    <packaging>jar</packaging>
+    <name>Google Geocoder v3</name>
+
+    <properties>
+        <org.apache.httpcomponents.httpclient.version>4.1.1</org.apache.httpcomponents.httpclient.version>
+        <org.codehaus.jackson.version>1.8.3</org.codehaus.jackson.version>
+    </properties>
+
+    <dependencies>
+        <!-- Project dependencies -->
+        <dependency>
+            <groupId>com.github.sandrasi</groupId>
+            <artifactId>geocoder-core</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <!-- Library dependencies -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>${org.apache.httpcomponents.httpclient.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>${org.codehaus.jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+    </dependencies>
+</project>
