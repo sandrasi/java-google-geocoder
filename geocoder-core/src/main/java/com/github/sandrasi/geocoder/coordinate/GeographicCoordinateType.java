@@ -150,7 +150,7 @@ public enum GeographicCoordinateType {
     /**
      * Common geographic coordinate-related constants.
      */
-    public static interface CoordinateConstants {
+    public interface CoordinateConstants {
 
         /**
          * The minimum latitude
