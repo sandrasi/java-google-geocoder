@@ -35,6 +35,16 @@ public enum AddressComponentType {
     BUS_STATION,
 
     /**
+     * Indicates a church.
+     */
+    CHURCH,
+
+    /**
+     * Indicates a city hall.
+     */
+    CITY_HALL,
+
+    /**
      * Indicates a commonly-used alternative name for the entity.
      */
     COLLOQUIAL_AREA,
@@ -44,6 +54,11 @@ public enum AddressComponentType {
      * by a geocoder service.
      */
     COUNTRY,
+
+    /**
+     * Indicates a courthouse.
+     */
+    COURTHOUSE,
 
     /**
      * Indicates a named establishment.
@@ -56,14 +71,39 @@ public enum AddressComponentType {
     FLOOR,
 
     /**
+     * Indicates a healthcare location.
+     */
+    HEALTH,
+
+    /**
+     * Indicates a hospital.
+     */
+    HOSPITAL,
+
+    /**
      * Indicates a major intersection, usually of two major roads.
      */
     INTERSECTION,
 
     /**
+     * Indicates a library.
+     */
+    LIBRARY,
+
+    /**
      * Indicates an incorporated city or town political entity.
      */
     LOCALITY,
+
+    /**
+     * Indicates a local government office.
+     */
+    LOCAL_GOVERNMENT_OFFICE,
+
+    /**
+     * Indicates a museum.
+     */
+    MUSEUM,
 
     /**
      * Indicates a prominent natural feature.
@@ -79,6 +119,11 @@ public enum AddressComponentType {
      * Indicates a named park.
      */
     PARK,
+
+    /**
+     * Indicates a place of worship.
+     */
+    PLACE_OF_WORSHIP,
 
     /**
      * Indicates a named point of interest. Typically, these "POI"s are prominent local
@@ -115,6 +160,11 @@ public enum AddressComponentType {
     POSTAL_TOWN,
 
     /**
+     * Indicates a post office.
+     */
+    POST_OFFICE,
+
+    /**
      * Indicates a named location, usually a building or collection of buildings with a common name.
      */
     PREMISE,
@@ -128,6 +178,11 @@ public enum AddressComponentType {
      * Indicates a named route (such as "US 101").
      */
     ROUTE,
+
+    /**
+     * Indicates a school.
+     */
+    SCHOOL,
 
     /**
      * Indicates a precise street address.
@@ -151,6 +206,11 @@ public enum AddressComponentType {
     SUBPREMISE,
 
     /**
+     * Indicates a subway station.
+     */
+    SUBWAY_STATION,
+
+    /**
      * Indicates a train station.
      */
     TRAIN_STATION,
@@ -158,5 +218,10 @@ public enum AddressComponentType {
     /**
      * Indicates a transit station.
      */
-    TRANSIT_STATION
+    TRANSIT_STATION,
+
+    /**
+     * Inidicates a university.
+     */
+    UNIVERSITY
 }
