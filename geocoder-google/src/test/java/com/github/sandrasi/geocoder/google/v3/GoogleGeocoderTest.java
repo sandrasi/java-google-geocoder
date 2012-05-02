@@ -14,15 +14,16 @@ import org.apache.http.StatusLine;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.conn.ClientConnectionManager;
-import org.easymock.Capture;
-import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 
 import static com.github.sandrasi.geocoder.components.GeocodeStatus.*;
-import static org.easymock.EasyMock.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.*;
 
 public class GoogleGeocoderTest {
 
@@ -33,36 +34,35 @@ public class GoogleGeocoderTest {
 
     @Before
     public void setUp() {
-        httpClient = EasyMock.createMock(HttpClient.class);
+        httpClient = mock(HttpClient.class);
         subject = GoogleGeocoderFactory.createGoogleGeocoder(httpClient);
     }
 
     @Test
     public void shouldGeocodeAddress() throws Exception {
-        Capture<HttpGet> capturedHttpGet = new Capture<>();
-        HttpResponse httpResponse = EasyMock.createMock(HttpResponse.class);
-        StatusLine statusLine = EasyMock.createMock(StatusLine.class);
-        HttpEntity httpEntity = EasyMock.createMock(HttpEntity.class);
-        ClientConnectionManager clientConnectionManager = EasyMock.createMock(ClientConnectionManager.class);
+        HttpResponse httpResponse = mock(HttpResponse.class);
+        StatusLine statusLine = mock(StatusLine.class);
+        HttpEntity httpEntity = mock(HttpEntity.class);
+        ClientConnectionManager clientConnectionManager = mock(ClientConnectionManager.class);
 
-        expect(httpClient.execute(capture(capturedHttpGet))).andReturn(httpResponse);
-        expect(httpResponse.getStatusLine()).andReturn(statusLine);
-        expect(statusLine.getStatusCode()).andReturn(HTTP_OK);
-        expect(httpResponse.getEntity()).andReturn(httpEntity);
-        expect(httpEntity.getContent()).andReturn(new ByteArrayInputStream("{\"status\":\"ZERO_RESULTS\",\"results\":[]}".getBytes()));
-        expect(httpClient.getConnectionManager()).andReturn(clientConnectionManager);
+        given(httpClient.execute(any(HttpGet.class))).willReturn(httpResponse);
+        given(httpResponse.getStatusLine()).willReturn(statusLine);
+        given(statusLine.getStatusCode()).willReturn(HTTP_OK);
+        given(httpResponse.getEntity()).willReturn(httpEntity);
+        given(httpEntity.getContent()).willReturn(new ByteArrayInputStream("{\"status\":\"ZERO_RESULTS\",\"results\":[]}".getBytes()));
+        given(httpClient.getConnectionManager()).willReturn(clientConnectionManager);
         clientConnectionManager.closeExpiredConnections();
-        replay(httpClient, httpResponse, statusLine, httpEntity, clientConnectionManager);
 
         GeocodeResponse geocodeResponse = subject.geocodeAddress("1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA");
 
-        verify(httpClient, httpResponse, statusLine, httpEntity, clientConnectionManager);
+        ArgumentCaptor<HttpGet> httpGetCaptor = ArgumentCaptor.forClass(HttpGet.class);
+        verify(httpClient).execute(httpGetCaptor.capture());
 
         URI expectedUri = URI.create("http://maps.googleapis.com/maps/api/geocode/json"
                 + "?address=" + URLEncoder.encode("1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA", "UTF-8")
                 + "&sensor=false");
 
-        assertThat(capturedHttpGet.getValue().getURI(), is(expectedUri));
+        assertThat(httpGetCaptor.getValue().getURI(), is(expectedUri));
         assertThat(geocodeResponse.getGeocodeStatus(), is(ZERO_RESULTS));
         assertThat(geocodeResponse.getQueryString(), is("1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA"));
         assertThat(geocodeResponse.getGeocodedAddresses(), is(Collections.<GeocodedAddress>emptyList()));
@@ -70,30 +70,29 @@ public class GoogleGeocoderTest {
 
     @Test
     public void shouldLookupAddress() throws Exception {
-        Capture<HttpGet> capturedHttpGet = new Capture<>();
-        HttpResponse httpResponse = EasyMock.createMock(HttpResponse.class);
-        StatusLine statusLine = EasyMock.createMock(StatusLine.class);
-        HttpEntity httpEntity = EasyMock.createMock(HttpEntity.class);
-        ClientConnectionManager clientConnectionManager = EasyMock.createMock(ClientConnectionManager.class);
+        HttpResponse httpResponse = mock(HttpResponse.class);
+        StatusLine statusLine = mock(StatusLine.class);
+        HttpEntity httpEntity = mock(HttpEntity.class);
+        ClientConnectionManager clientConnectionManager = mock(ClientConnectionManager.class);
 
-        expect(httpClient.execute(capture(capturedHttpGet))).andReturn(httpResponse);
-        expect(httpResponse.getStatusLine()).andReturn(statusLine);
-        expect(statusLine.getStatusCode()).andReturn(HTTP_OK);
-        expect(httpResponse.getEntity()).andReturn(httpEntity);
-        expect(httpEntity.getContent()).andReturn(new ByteArrayInputStream("{\"status\":\"ZERO_RESULTS\",\"results\":[]}".getBytes()));
-        expect(httpClient.getConnectionManager()).andReturn(clientConnectionManager);
+        given(httpClient.execute(any(HttpGet.class))).willReturn(httpResponse);
+        given(httpResponse.getStatusLine()).willReturn(statusLine);
+        given(statusLine.getStatusCode()).willReturn(HTTP_OK);
+        given(httpResponse.getEntity()).willReturn(httpEntity);
+        given(httpEntity.getContent()).willReturn(new ByteArrayInputStream("{\"status\":\"ZERO_RESULTS\",\"results\":[]}".getBytes()));
+        given(httpClient.getConnectionManager()).willReturn(clientConnectionManager);
         clientConnectionManager.closeExpiredConnections();
-        replay(httpClient, httpResponse, statusLine, httpEntity, clientConnectionManager);
 
         GeocodeResponse geocodeResponse = subject.lookupAddress(37.422782, -122.085099);
 
-        verify(httpClient, httpResponse, statusLine, httpEntity, clientConnectionManager);
+        ArgumentCaptor<HttpGet> httpGetCaptor = ArgumentCaptor.forClass(HttpGet.class);
+        verify(httpClient).execute(httpGetCaptor.capture());
 
         URI expectedUri = URI.create("http://maps.googleapis.com/maps/api/geocode/json"
                 + "?latlng=" + URLEncoder.encode("37.422782,-122.085099", "UTF-8")
                 + "&sensor=false");
 
-        assertThat(capturedHttpGet.getValue().getURI(), is(expectedUri));
+        assertThat(httpGetCaptor.getValue().getURI(), is(expectedUri));
         assertThat(geocodeResponse.getGeocodeStatus(), is(ZERO_RESULTS));
         assertThat(geocodeResponse.getQueryString(), is("37.422782, -122.085099"));
         assertThat(geocodeResponse.getGeocodedAddresses(), is(Collections.<GeocodedAddress>emptyList()));
@@ -101,20 +100,18 @@ public class GoogleGeocoderTest {
 
     @Test
     public void shouldGeocodeArbitraryRequest() throws Exception {
-        Capture<HttpGet> capturedHttpGet = new Capture<>();
-        HttpResponse httpResponse = EasyMock.createMock(HttpResponse.class);
-        StatusLine statusLine = EasyMock.createMock(StatusLine.class);
-        HttpEntity httpEntity = EasyMock.createMock(HttpEntity.class);
-        ClientConnectionManager clientConnectionManager = EasyMock.createMock(ClientConnectionManager.class);
+        HttpResponse httpResponse = mock(HttpResponse.class);
+        StatusLine statusLine = mock(StatusLine.class);
+        HttpEntity httpEntity = mock(HttpEntity.class);
+        ClientConnectionManager clientConnectionManager = mock(ClientConnectionManager.class);
 
-        expect(httpClient.execute(capture(capturedHttpGet))).andReturn(httpResponse);
-        expect(httpResponse.getStatusLine()).andReturn(statusLine);
-        expect(statusLine.getStatusCode()).andReturn(HTTP_OK);
-        expect(httpResponse.getEntity()).andReturn(httpEntity);
-        expect(httpEntity.getContent()).andReturn(new ByteArrayInputStream("{\"status\":\"ZERO_RESULTS\",\"results\":[]}".getBytes()));
-        expect(httpClient.getConnectionManager()).andReturn(clientConnectionManager);
+        given(httpClient.execute(any(HttpGet.class))).willReturn(httpResponse);
+        given(httpResponse.getStatusLine()).willReturn(statusLine);
+        given(statusLine.getStatusCode()).willReturn(HTTP_OK);
+        given(httpResponse.getEntity()).willReturn(httpEntity);
+        given(httpEntity.getContent()).willReturn(new ByteArrayInputStream("{\"status\":\"ZERO_RESULTS\",\"results\":[]}".getBytes()));
+        given(httpClient.getConnectionManager()).willReturn(clientConnectionManager);
         clientConnectionManager.closeExpiredConnections();
-        replay(httpClient, httpResponse, statusLine, httpEntity, clientConnectionManager);
 
         GoogleGeocodeRequest googleGeocodeRequest = subject.newGeocodeRequestBuilder("1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA")
                 .withViewportBiasing(GeographicLocation.fromValues(36.421776, -123.084665), GeographicLocation.fromValues(38.421776, -121.084665))
@@ -124,7 +121,8 @@ public class GoogleGeocoderTest {
 
         GeocodeResponse geocodeResponse = subject.geocode(googleGeocodeRequest);
 
-        verify(httpClient, httpResponse, statusLine, httpEntity, clientConnectionManager);
+        ArgumentCaptor<HttpGet> httpGetCaptor = ArgumentCaptor.forClass(HttpGet.class);
+        verify(httpClient).execute(httpGetCaptor.capture());
 
         URI expectedUri = URI.create("http://maps.googleapis.com/maps/api/geocode/json"
                 + "?address=" + URLEncoder.encode("1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA", "UTF-8")
@@ -133,33 +131,32 @@ public class GoogleGeocoderTest {
                 + "&language=en"
                 + "&sensor=false");
 
-        assertThat(capturedHttpGet.getValue().getURI(), is(expectedUri));
+        assertThat(httpGetCaptor.getValue().getURI(), is(expectedUri));
         assertThat(geocodeResponse.getGeocodeStatus(), is(ZERO_RESULTS));
         assertThat(geocodeResponse.getQueryString(), is("1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA"));
         assertThat(geocodeResponse.getGeocodedAddresses(), is(Collections.<GeocodedAddress>emptyList()));
     }
 
     @Test
-    public void shouldUseSignatureTheGeocodeRequest() throws Exception {
+    public void shouldUseSignatureInTheGeocodeRequest() throws Exception {
         subject = GoogleGeocoderFactory.createPremierGoogleGeocoder(httpClient, "johndoe", "foo");
-        Capture<HttpGet> capturedHttpGet = new Capture<>();
-        HttpResponse httpResponse = EasyMock.createMock(HttpResponse.class);
-        StatusLine statusLine = EasyMock.createMock(StatusLine.class);
-        HttpEntity httpEntity = EasyMock.createMock(HttpEntity.class);
-        ClientConnectionManager clientConnectionManager = EasyMock.createMock(ClientConnectionManager.class);
+        HttpResponse httpResponse = mock(HttpResponse.class);
+        StatusLine statusLine = mock(StatusLine.class);
+        HttpEntity httpEntity = mock(HttpEntity.class);
+        ClientConnectionManager clientConnectionManager = mock(ClientConnectionManager.class);
 
-        expect(httpClient.execute(capture(capturedHttpGet))).andReturn(httpResponse);
-        expect(httpResponse.getStatusLine()).andReturn(statusLine);
-        expect(statusLine.getStatusCode()).andReturn(HTTP_OK);
-        expect(httpResponse.getEntity()).andReturn(httpEntity);
-        expect(httpEntity.getContent()).andReturn(new ByteArrayInputStream("{\"status\":\"ZERO_RESULTS\",\"results\":[]}".getBytes()));
-        expect(httpClient.getConnectionManager()).andReturn(clientConnectionManager);
+        given(httpClient.execute(any(HttpGet.class))).willReturn(httpResponse);
+        given(httpResponse.getStatusLine()).willReturn(statusLine);
+        given(statusLine.getStatusCode()).willReturn(HTTP_OK);
+        given(httpResponse.getEntity()).willReturn(httpEntity);
+        given(httpEntity.getContent()).willReturn(new ByteArrayInputStream("{\"status\":\"ZERO_RESULTS\",\"results\":[]}".getBytes()));
+        given(httpClient.getConnectionManager()).willReturn(clientConnectionManager);
         clientConnectionManager.closeExpiredConnections();
-        replay(httpClient, httpResponse, statusLine, httpEntity, clientConnectionManager);
 
         GeocodeResponse geocodeResponse = subject.geocodeAddress("1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA");
 
-        verify(httpClient, httpResponse, statusLine, httpEntity, clientConnectionManager);
+        ArgumentCaptor<HttpGet> httpGetCaptor = ArgumentCaptor.forClass(HttpGet.class);
+        verify(httpClient).execute(httpGetCaptor.capture());
 
         URI expectedUri = URI.create("http://maps.googleapis.com/maps/api/geocode/json"
                 + "?address=" + URLEncoder.encode("1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA", "UTF-8")
@@ -167,7 +164,7 @@ public class GoogleGeocoderTest {
                 + "&sensor=false"
                 + "&signature=EARBW423RYvqC4gtI9YHoefgB0s=");
 
-        assertThat(capturedHttpGet.getValue().getURI(), is(expectedUri));
+        assertThat(httpGetCaptor.getValue().getURI(), is(expectedUri));
         assertThat(geocodeResponse.getGeocodeStatus(), is(ZERO_RESULTS));
         assertThat(geocodeResponse.getQueryString(), is("1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA"));
         assertThat(geocodeResponse.getGeocodedAddresses(), is(Collections.<GeocodedAddress>emptyList()));

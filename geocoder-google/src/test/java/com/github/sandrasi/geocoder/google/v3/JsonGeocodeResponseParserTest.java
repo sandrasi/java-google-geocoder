@@ -8,13 +8,16 @@ import java.util.Arrays;
 import com.github.sandrasi.geocoder.GeocodeException;
 import com.github.sandrasi.geocoder.components.*;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import static com.github.sandrasi.geocoder.components.AddressComponentType.*;
 import static com.github.sandrasi.geocoder.components.GeocodeStatus.*;
 import static com.github.sandrasi.geocoder.components.LocationType.*;
-import static org.easymock.EasyMock.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
+import static org.mockito.BDDMockito.*;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.mock;
 
 public class JsonGeocodeResponseParserTest {
 
@@ -198,10 +201,9 @@ public class JsonGeocodeResponseParserTest {
 
     @Test(expected = GeocodeException.class)
     public void shouldThrowExceptionIfAnIoExceptionOccursWhileReadingTheResponse() throws Exception {
-        InputStream inputStream = createMock(InputStream.class);
+        InputStream inputStream = mock(InputStream.class);
 
-        expect(inputStream.read((byte[]) anyObject(), anyInt(), anyInt())).andThrow(new IOException("Test I/O exception"));
-        replay(inputStream);
+        given(inputStream.read(Mockito.any(byte[].class), anyInt(), anyInt())).willThrow(IOException.class);
 
         JsonGeocodeResponseParser.parse("Test I/O exception", inputStream);
     }
