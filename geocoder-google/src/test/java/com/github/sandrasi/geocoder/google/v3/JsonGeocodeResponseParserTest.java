@@ -7,6 +7,7 @@ import java.util.Arrays;
 
 import com.github.sandrasi.geocoder.GeocodeException;
 import com.github.sandrasi.geocoder.components.*;
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -22,86 +23,8 @@ import static org.mockito.Mockito.mock;
 public class JsonGeocodeResponseParserTest {
 
     @Test
-    public void shouldParseJsonGeocodeResponse() {
-        String jsonGeocodeResponse =
-                "{"
-                + "    \"status\":\"OK\","
-                + "    \"results\":["
-                + "        {"
-                + "            \"types\":[\"street_address\"],"
-                + "            \"formatted_address\":\"1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA\","
-                + "            \"address_components\":["
-                + "                {"
-                + "                    \"long_name\":\"1600\","
-                + "                    \"short_name\":\"1600\","
-                + "                    \"types\":[\"street_number\"]"
-                + "                },"
-                + "                {"
-                + "                    \"long_name\":\"Amphitheatre Pkwy\","
-                + "                    \"short_name\":\"Amphitheatre Pkwy\","
-                + "                    \"types\":[\"route\"]"
-                + "                },"
-                + "                {"
-                + "                    \"long_name\":\"Mountain View\","
-                + "                    \"short_name\":\"Mountain View\","
-                + "                    \"types\":[\"locality\",\"political\"]"
-                + "                },"
-                + "                {"
-                + "                    \"long_name\":\"San Jose\","
-                + "                    \"short_name\":\"San Jose\","
-                + "                    \"types\":[\"administrative_area_level_3\",\"political\"]"
-                + "                },"
-                + "                {"
-                + "                    \"long_name\":\"Santa Clara\","
-                + "                    \"short_name\":\"Santa Clara\","
-                + "                    \"types\":[\"administrative_area_level_2\",\"political\"]"
-                + "                },"
-                + "                {"
-                + "                    \"long_name\":\"California\","
-                + "                    \"short_name\":\"CA\","
-                + "                    \"types\":[\"administrative_area_level_1\",\"political\"]"
-                + "                },"
-                + "                {"
-                + "                    \"long_name\":\"United States\","
-                + "                    \"short_name\":\"US\","
-                + "                    \"types\":[\"country\",\"political\"]"
-                + "                },"
-                + "                {"
-                + "                    \"long_name\":\"94043\","
-                + "                    \"short_name\":\"94043\","
-                + "                    \"types\":[\"postal_code\"]"
-                + "                }"
-                + "            ],"
-                + "            \"geometry\":{"
-                + "                \"location\":{"
-                + "                    \"lat\":37.4227820,"
-                + "                    \"lng\":-122.0850990"
-                + "                },"
-                + "                \"location_type\":\"ROOFTOP\","
-                + "                \"viewport\":{"
-                + "                    \"southwest\":{"
-                + "                        \"lat\":37.4196344,"
-                + "                        \"lng\":-122.0882466"
-                + "                    },"
-                + "                    \"northeast\":{"
-                + "                        \"lat\":37.4259296,"
-                + "                        \"lng\":-122.0819514"
-                + "                    }"
-                + "                },"
-                + "                \"bounds\":{"
-                + "                    \"southwest\":{"
-                + "                        \"lat\":36.4196344,"
-                + "                        \"lng\":-123.0882466"
-                + "                    },"
-                + "                    \"northeast\":{"
-                + "                        \"lat\":38.4259296,"
-                + "                        \"lng\":-121.0819514"
-                + "                    }"
-                + "                }"
-                + "            }"
-                + "        }"
-                + "    ]"
-                + "}";
+    public void shouldParseJsonGeocodeResponse() throws Exception {
+        String jsonGeocodeResponse = IOUtils.toString(JsonGeocodeResponseParserTest.class.getResourceAsStream("/json/valid/validGeocodeResponse.json"));
 
         GoogleGeocodeResponse googleGeocodeResponse = JsonGeocodeResponseParser.parse("1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA", new ByteArrayInputStream(jsonGeocodeResponse.getBytes()));
 
@@ -129,41 +52,8 @@ public class JsonGeocodeResponseParserTest {
     }
 
     @Test
-    public void shouldIgnoreUnknownAddressComponents() {
-        String jsonGeocodeResponse =
-                "{"
-              + "    \"status\":\"OK\","
-              + "    \"results\":["
-              + "        {"
-              + "            \"types\":[\"street_address\"],"
-              + "            \"formatted_address\":\"1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA\","
-              + "            \"address_components\":["
-              + "                {"
-              + "                    \"long_name\":\"1600\","
-              + "                    \"short_name\":\"1600\","
-              + "                    \"types\":[\"invalid_address_component\"]"
-              + "                }"
-              + "            ],"
-              + "            \"geometry\":{"
-              + "                \"location\":{"
-              + "                    \"lat\":37.4227820,"
-              + "                    \"lng\":-122.0850990"
-              + "                },"
-              + "                \"location_type\":\"ROOFTOP\","
-              + "                \"viewport\":{"
-              + "                    \"southwest\":{"
-              + "                        \"lat\":37.4196344,"
-              + "                        \"lng\":-122.0882466"
-              + "                    },"
-              + "                    \"northeast\":{"
-              + "                        \"lat\":37.4259296,"
-              + "                        \"lng\":-122.0819514"
-              + "                    }"
-              + "                }"
-              + "            }"
-              + "        }"
-              + "    ]"
-              + "}";
+    public void shouldIgnoreUnknownAddressComponents() throws Exception {
+        String jsonGeocodeResponse = IOUtils.toString(JsonGeocodeResponseParserTest.class.getResourceAsStream("/json/invalid/unknownAddressComponentGeocodeResponse.json"));
 
        GoogleGeocodeResponse googleGeocodeResponse = JsonGeocodeResponseParser.parse("1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA", new ByteArrayInputStream(jsonGeocodeResponse.getBytes()));
 
@@ -171,12 +61,8 @@ public class JsonGeocodeResponseParserTest {
     }
 
     @Test
-    public void shouldParseEmptyResults() {
-        String jsonGeocodeResponse =
-                "{"
-              + "    \"status\":\"ZERO_RESULTS\","
-              + "    \"results\":[]"
-              + "}";
+    public void shouldParseEmptyResults() throws Exception {
+        String jsonGeocodeResponse = IOUtils.toString(JsonGeocodeResponseParserTest.class.getResourceAsStream("/json/valid/emptyGeocodeResponse.json"));
 
         GoogleGeocodeResponse googleGeocodeResponse = JsonGeocodeResponseParser.parse("there is no such address", new ByteArrayInputStream(jsonGeocodeResponse.getBytes()));
 
@@ -184,12 +70,8 @@ public class JsonGeocodeResponseParserTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void shouldThrowExceptionIfOriginalQueryStringIsNull() {
-        String jsonGeocodeResponse =
-                "{"
-              + "    \"status\":\"ZERO_RESULTS\","
-              + "    \"results\":[]"
-              + "}";
+    public void shouldThrowExceptionIfOriginalQueryStringIsNull() throws Exception {
+        String jsonGeocodeResponse = IOUtils.toString(JsonGeocodeResponseParserTest.class.getResourceAsStream("/json/valid/emptyGeocodeResponse.json"));
 
         JsonGeocodeResponseParser.parse(null, new ByteArrayInputStream(jsonGeocodeResponse.getBytes()));
     }
@@ -209,21 +91,15 @@ public class JsonGeocodeResponseParserTest {
     }
 
     @Test(expected = GeocodeException.class)
-    public void shouldThrowExceptionIfTheStatusFieldIsMissingFromTheResponse() {
-        String jsonGeocodeResponse =
-            "{"
-                + "\"results\":[]"
-          + "}";
+    public void shouldThrowExceptionIfTheStatusFieldIsMissingFromTheResponse() throws Exception {
+        String jsonGeocodeResponse = IOUtils.toString(JsonGeocodeResponseParserTest.class.getResourceAsStream("/json/invalid/missingStatusFieldGeocodeResponse.json"));
 
         JsonGeocodeResponseParser.parse("1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA", new ByteArrayInputStream(jsonGeocodeResponse.getBytes()));
     }
 
     @Test(expected = GeocodeException.class)
-    public void shouldThrowExceptionIfTheResultsArrayIsMissingFromTheResponse() {
-        String jsonGeocodeResponse =
-            "{"
-                + "\"status\":\"ZERO_RESULTS\""
-          + "}";
+    public void shouldThrowExceptionIfTheResultsArrayIsMissingFromTheResponse() throws Exception {
+        String jsonGeocodeResponse = IOUtils.toString(JsonGeocodeResponseParserTest.class.getResourceAsStream("/json/invalid/missingResultsArrayGeocodeResponse.json"));
 
         JsonGeocodeResponseParser.parse("1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA", new ByteArrayInputStream(jsonGeocodeResponse.getBytes()));
     }
