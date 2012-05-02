@@ -1,23 +1,15 @@
 package com.github.sandrasi.geocoder.google.v3;
 
-import static com.github.sandrasi.geocoder.components.AddressComponentType.POINT_OF_INTEREST;
-import static com.github.sandrasi.geocoder.components.GeocodeStatus.OK;
-import static com.github.sandrasi.geocoder.components.LocationType.APPROXIMATE;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-
 import java.util.Arrays;
 
+import com.github.sandrasi.geocoder.components.*;
 import org.junit.Test;
 
-import com.github.sandrasi.geocoder.components.GeocodeStatus;
-import com.github.sandrasi.geocoder.components.GeocodedAddress;
-import com.github.sandrasi.geocoder.components.GeographicArea;
-import com.github.sandrasi.geocoder.components.GeographicLocation;
-import com.github.sandrasi.geocoder.components.Geometry;
+import static com.github.sandrasi.geocoder.components.AddressComponentType.*;
+import static com.github.sandrasi.geocoder.components.GeocodeStatus.*;
+import static com.github.sandrasi.geocoder.components.LocationType.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 public class GoogleGeocodeResponseTest {
 
@@ -50,22 +42,22 @@ public class GoogleGeocodeResponseTest {
         assertThat(googleGeocodeResponse.getGeocodedAddresses(), is(Arrays.asList(googleCampusAddress, googleplexAddress)));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionIfQueryStringIsNullInBuilder() {
         GoogleGeocodeResponse.newBuilder(null);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionIfGeocodeStatusIsSetToNullInBuilder() {
         GoogleGeocodeResponse.newBuilder("Mountain View").setGeocodeStatus(null);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionIfAddedGeocodedAddressIsNullInBuilder() {
         GoogleGeocodeResponse.newBuilder("Mountain View").addGeocodedAddress(null);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionIfAddedGeocodedAddressesAreNullInBuilder() {
         GoogleGeocodeResponse.newBuilder("Mountain View").addGeocodedAddresses(null);
     }

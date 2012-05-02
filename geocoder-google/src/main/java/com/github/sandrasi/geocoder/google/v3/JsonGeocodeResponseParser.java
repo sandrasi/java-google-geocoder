@@ -5,21 +5,13 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.Validate;
+import com.github.sandrasi.geocoder.GeocodeException;
+import com.github.sandrasi.geocoder.components.*;
+import org.apache.commons.lang3.Validate;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.github.sandrasi.geocoder.GeocodeException;
-import com.github.sandrasi.geocoder.components.AddressComponent;
-import com.github.sandrasi.geocoder.components.AddressComponentType;
-import com.github.sandrasi.geocoder.components.GeocodeStatus;
-import com.github.sandrasi.geocoder.components.GeocodedAddress;
-import com.github.sandrasi.geocoder.components.GeographicArea;
-import com.github.sandrasi.geocoder.components.GeographicLocation;
-import com.github.sandrasi.geocoder.components.Geometry;
-import com.github.sandrasi.geocoder.components.LocationType;
 
 /**
  * A parser to convert a JSON-string into {@link GoogleGeocodeResponse}.
@@ -47,10 +39,8 @@ final class JsonGeocodeResponseParser {
     private static final String FIELD_LONG_NAME = "long_name";
     private static final String FIELD_SHORT_NAME = "short_name";
 
-    // ///CLOVER:OFF
     private JsonGeocodeResponseParser() {
     }
-    // ///CLOVER:ON
 
     /**
      * Parses the JSON-string representing a Google geocode response and converts it into
@@ -95,7 +85,7 @@ final class JsonGeocodeResponseParser {
     }
 
     private static List<GeocodedAddress> parseGeocodedAddresses(JsonNode geocodeResponseRoot) {
-        List<GeocodedAddress> geocodedAddresses = new ArrayList<GeocodedAddress>();
+        List<GeocodedAddress> geocodedAddresses = new ArrayList<>();
 
         for (JsonNode jsonGeocodedAddress : geocodeResponseRoot.path(FIELD_RESULTS)) {
             validateJsonFieldExists(jsonGeocodedAddress, FIELD_TYPES);
@@ -114,7 +104,7 @@ final class JsonGeocodeResponseParser {
     }
 
     private static List<AddressComponentType> parseAddressComponentTypes(JsonNode jsonAddressComponentTypes) {
-        List<AddressComponentType> addressComponentTypes = new ArrayList<AddressComponentType>();
+        List<AddressComponentType> addressComponentTypes = new ArrayList<>();
 
         for (JsonNode addressType : jsonAddressComponentTypes) {
             try {
@@ -166,7 +156,7 @@ final class JsonGeocodeResponseParser {
     }
 
     private static List<AddressComponent> parseAddressComponents(JsonNode jsonAddressComponents) {
-        List<AddressComponent> addressComponents = new ArrayList<AddressComponent>();
+        List<AddressComponent> addressComponents = new ArrayList<>();
 
         for (JsonNode jsonAddressComponent : jsonAddressComponents) {
             validateJsonFieldExists(jsonAddressComponent, FIELD_LONG_NAME);

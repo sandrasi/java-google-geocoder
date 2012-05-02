@@ -1,12 +1,11 @@
 package com.github.sandrasi.geocoder.google.v3;
 
-import org.apache.commons.lang.Validate;
-import org.apache.http.client.HttpClient;
-
 import com.github.sandrasi.geocoder.GeocodeResponse;
 import com.github.sandrasi.geocoder.Geocoder;
 import com.github.sandrasi.geocoder.components.GeographicLocation;
 import com.github.sandrasi.geocoder.util.Timer;
+import org.apache.commons.lang3.Validate;
+import org.apache.http.client.HttpClient;
 
 /**
  * {@code GoogleGeocoder} is a Java wrapper around the <i>Google Geocoding API</i>. It converts

@@ -22,10 +22,8 @@ public final class GoogleGeocoderFactory {
      */
     public static final long DEFAUL_REQUEST_RATE_IN_MILLISECONDS = 34560;
 
-    // ///CLOVER:OFF
     private GoogleGeocoderFactory() {
     }
-    // ///CLOVER:ON
 
     /**
      * Constructs a new {@code GoogleGeocoder}. The geocoder instance maintains only one active HTTP

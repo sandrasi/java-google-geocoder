@@ -22,7 +22,7 @@ public enum GeocodeStatus {
     OVER_QUERY_LIMIT,
 
     /**
-     * Indicates that the geocode request was denie.
+     * Indicates that the geocode request was denied.
      */
     REQUEST_DENIED,
 

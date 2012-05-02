@@ -1,18 +1,13 @@
 package com.github.sandrasi.geocoder.google.v3;
 
-import static com.github.sandrasi.geocoder.components.GeocodeStatus.ZERO_RESULTS;
-import static org.easymock.EasyMock.capture;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.verify;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-
 import java.io.ByteArrayInputStream;
 import java.net.URI;
 import java.net.URLEncoder;
 import java.util.Collections;
 
+import com.github.sandrasi.geocoder.GeocodeResponse;
+import com.github.sandrasi.geocoder.components.GeocodedAddress;
+import com.github.sandrasi.geocoder.components.GeographicLocation;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
@@ -24,9 +19,10 @@ import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.github.sandrasi.geocoder.GeocodeResponse;
-import com.github.sandrasi.geocoder.components.GeocodedAddress;
-import com.github.sandrasi.geocoder.components.GeographicLocation;
+import static com.github.sandrasi.geocoder.components.GeocodeStatus.*;
+import static org.easymock.EasyMock.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 public class GoogleGeocoderTest {
 
@@ -43,7 +39,7 @@ public class GoogleGeocoderTest {
 
     @Test
     public void shouldGeocodeAddress() throws Exception {
-        Capture<HttpGet> capturedHttpGet = new Capture<HttpGet>();
+        Capture<HttpGet> capturedHttpGet = new Capture<>();
         HttpResponse httpResponse = EasyMock.createMock(HttpResponse.class);
         StatusLine statusLine = EasyMock.createMock(StatusLine.class);
         HttpEntity httpEntity = EasyMock.createMock(HttpEntity.class);
@@ -74,7 +70,7 @@ public class GoogleGeocoderTest {
 
     @Test
     public void shouldLookupAddress() throws Exception {
-        Capture<HttpGet> capturedHttpGet = new Capture<HttpGet>();
+        Capture<HttpGet> capturedHttpGet = new Capture<>();
         HttpResponse httpResponse = EasyMock.createMock(HttpResponse.class);
         StatusLine statusLine = EasyMock.createMock(StatusLine.class);
         HttpEntity httpEntity = EasyMock.createMock(HttpEntity.class);
@@ -105,7 +101,7 @@ public class GoogleGeocoderTest {
 
     @Test
     public void shouldGeocodeArbitraryRequest() throws Exception {
-        Capture<HttpGet> capturedHttpGet = new Capture<HttpGet>();
+        Capture<HttpGet> capturedHttpGet = new Capture<>();
         HttpResponse httpResponse = EasyMock.createMock(HttpResponse.class);
         StatusLine statusLine = EasyMock.createMock(StatusLine.class);
         HttpEntity httpEntity = EasyMock.createMock(HttpEntity.class);
@@ -146,7 +142,7 @@ public class GoogleGeocoderTest {
     @Test
     public void shouldUseSignatureTheGeocodeRequest() throws Exception {
         subject = GoogleGeocoderFactory.createPremierGoogleGeocoder(httpClient, "johndoe", "foo");
-        Capture<HttpGet> capturedHttpGet = new Capture<HttpGet>();
+        Capture<HttpGet> capturedHttpGet = new Capture<>();
         HttpResponse httpResponse = EasyMock.createMock(HttpResponse.class);
         StatusLine statusLine = EasyMock.createMock(StatusLine.class);
         HttpEntity httpEntity = EasyMock.createMock(HttpEntity.class);

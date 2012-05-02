@@ -1,13 +1,11 @@
 package com.github.sandrasi.geocoder.coordinate;
 
-import static com.github.sandrasi.geocoder.coordinate.GeographicCoordinateType.LATITUDE;
-import static com.github.sandrasi.geocoder.coordinate.GeographicCoordinateType.LONGITUDE;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import java.math.BigDecimal;
 
 import org.junit.Test;
+
+import static com.github.sandrasi.geocoder.coordinate.GeographicCoordinateType.*;
+import static org.junit.Assert.*;
 
 public class GeographicCoordinateTypeTest {
 
@@ -27,7 +25,7 @@ public class GeographicCoordinateTypeTest {
         assertFalse(LONGITUDE.isValidValue(new BigDecimal(180.1)));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionIfBigDecimalCoordinateIsNull() {
         LATITUDE.isValidValue(null);
     }
@@ -72,7 +70,7 @@ public class GeographicCoordinateTypeTest {
         assertFalse(LONGITUDE.isValidAngle(180, 0, 0, 0, CardinalDirection.NORTH));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionIfCardinalDirectionIsNull() {
         LATITUDE.isValidAngle(0, 0, 0, 0, null);
     }

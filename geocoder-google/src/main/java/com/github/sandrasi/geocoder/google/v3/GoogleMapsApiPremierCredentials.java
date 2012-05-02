@@ -3,15 +3,13 @@ package com.github.sandrasi.geocoder.google.v3;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.Validate;
-
 import com.github.sandrasi.geocoder.GeocodeException;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 
 /**
  * {@code GoogleMapsApiPremierCredentials} holds the Google Maps API premium client ID and key used to access the

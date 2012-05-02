@@ -1,11 +1,10 @@
 package com.github.sandrasi.geocoder.coordinate;
 
-import static com.github.sandrasi.geocoder.coordinate.GeographicCoordinateType.LATITUDE;
-import static com.github.sandrasi.geocoder.coordinate.GeographicCoordinateType.LONGITUDE;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-
 import org.junit.Test;
+
+import static com.github.sandrasi.geocoder.coordinate.GeographicCoordinateType.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 public class CardinalDirectionTest {
 

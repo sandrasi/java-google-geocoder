@@ -1,17 +1,13 @@
 package com.github.sandrasi.geocoder.components;
 
-import static com.github.sandrasi.geocoder.components.AddressComponentType.NATURAL_FEATURE;
-import static com.github.sandrasi.geocoder.components.AddressComponentType.POLITICAL;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-
 import java.util.Arrays;
 import java.util.TreeSet;
 
 import org.junit.Test;
+
+import static com.github.sandrasi.geocoder.components.AddressComponentType.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 public class AddressComponentTest {
 
@@ -29,17 +25,17 @@ public class AddressComponentTest {
         assertThat(addressComponent.getShortName(), is("US"));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionIfAddressComponentTypeIsNullInBuilder() {
         AddressComponent.newBuilder(null);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionIfAddedAddressComponentTypeIsNullInBuilder() {
         AddressComponent.newBuilder(AddressComponentType.COUNTRY).addAddressComponentType(null);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionIfAddedAddressComponentTypesIsNullInBuilder() {
         AddressComponent.newBuilder(AddressComponentType.COUNTRY).addAddressComponentTypes(null);
     }
@@ -49,12 +45,12 @@ public class AddressComponentTest {
         AddressComponent.newBuilder(AddressComponentType.COUNTRY).addAddressComponentTypes(Arrays.asList((AddressComponentType) null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionIfLongNameIsSetToNullBuilder() {
         AddressComponent.newBuilder(AddressComponentType.COUNTRY).setLongName(null);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionIfShortNameIsSetToNullInBuilder() {
         AddressComponent.newBuilder(AddressComponentType.COUNTRY).setShortName(null);
     }

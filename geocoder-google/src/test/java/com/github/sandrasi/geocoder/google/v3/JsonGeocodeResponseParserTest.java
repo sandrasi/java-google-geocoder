@@ -1,33 +1,20 @@
 package com.github.sandrasi.geocoder.google.v3;
 
-import static com.github.sandrasi.geocoder.components.AddressComponentType.POLITICAL;
-import static com.github.sandrasi.geocoder.components.AddressComponentType.STREET_ADDRESS;
-import static com.github.sandrasi.geocoder.components.GeocodeStatus.OK;
-import static com.github.sandrasi.geocoder.components.LocationType.ROOFTOP;
-import static org.easymock.EasyMock.anyInt;
-import static org.easymock.EasyMock.anyObject;
-import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.replay;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 
+import com.github.sandrasi.geocoder.GeocodeException;
+import com.github.sandrasi.geocoder.components.*;
 import org.junit.Test;
 
-import com.github.sandrasi.geocoder.GeocodeException;
-import com.github.sandrasi.geocoder.components.AddressComponent;
-import com.github.sandrasi.geocoder.components.AddressComponentType;
-import com.github.sandrasi.geocoder.components.GeocodedAddress;
-import com.github.sandrasi.geocoder.components.GeographicArea;
-import com.github.sandrasi.geocoder.components.GeographicLocation;
-import com.github.sandrasi.geocoder.components.Geometry;
+import static com.github.sandrasi.geocoder.components.AddressComponentType.*;
+import static com.github.sandrasi.geocoder.components.GeocodeStatus.*;
+import static com.github.sandrasi.geocoder.components.LocationType.*;
+import static org.easymock.EasyMock.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 public class JsonGeocodeResponseParserTest {
 
@@ -193,7 +180,7 @@ public class JsonGeocodeResponseParserTest {
         assertTrue(googleGeocodeResponse.getGeocodedAddresses().isEmpty());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionIfOriginalQueryStringIsNull() {
         String jsonGeocodeResponse =
                 "{"
@@ -204,7 +191,7 @@ public class JsonGeocodeResponseParserTest {
         JsonGeocodeResponseParser.parse(null, new ByteArrayInputStream(jsonGeocodeResponse.getBytes()));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionIfJsonInutStreamIsNull() {
         JsonGeocodeResponseParser.parse("1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA", null);
     }

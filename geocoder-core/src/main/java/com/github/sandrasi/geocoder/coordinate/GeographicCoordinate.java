@@ -1,19 +1,14 @@
 package com.github.sandrasi.geocoder.coordinate;
 
-import static com.github.sandrasi.geocoder.coordinate.CardinalDirection.EAST;
-import static com.github.sandrasi.geocoder.coordinate.CardinalDirection.NORTH;
-import static com.github.sandrasi.geocoder.coordinate.CardinalDirection.SOUTH;
-import static com.github.sandrasi.geocoder.coordinate.CardinalDirection.WEST;
-import static com.github.sandrasi.geocoder.coordinate.CardinalDirection.ZERO_LATITUDE_DEGREE;
-import static com.github.sandrasi.geocoder.coordinate.CardinalDirection.ZERO_LONGITUDE_DEGREE;
-import static com.github.sandrasi.geocoder.coordinate.GeographicCoordinateType.LATITUDE;
-
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import org.apache.commons.lang.Validate;
-import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang3.Validate;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
+import static com.github.sandrasi.geocoder.coordinate.CardinalDirection.*;
+import static com.github.sandrasi.geocoder.coordinate.GeographicCoordinateType.*;
 
 /**
  * {@code GeographicCoordinate} represents a horizontal or vertical coordinate in

@@ -1,15 +1,10 @@
 package com.github.sandrasi.geocoder.coordinate;
 
-import static com.github.sandrasi.geocoder.coordinate.CardinalDirection.EAST;
-import static com.github.sandrasi.geocoder.coordinate.CardinalDirection.NORTH;
-import static com.github.sandrasi.geocoder.coordinate.CardinalDirection.SOUTH;
-import static com.github.sandrasi.geocoder.coordinate.CardinalDirection.WEST;
-import static com.github.sandrasi.geocoder.coordinate.CardinalDirection.ZERO_LATITUDE_DEGREE;
-import static com.github.sandrasi.geocoder.coordinate.CardinalDirection.ZERO_LONGITUDE_DEGREE;
-
 import java.math.BigDecimal;
 
-import org.apache.commons.lang.Validate;
+import org.apache.commons.lang3.Validate;
+
+import static com.github.sandrasi.geocoder.coordinate.CardinalDirection.*;
 
 /**
  * {@code GeographicCoordinateType} represents the latitude and longitude coordinate types.
@@ -89,11 +84,7 @@ public enum GeographicCoordinateType {
             return isZeroAngle(degrees, minutes, seconds, millis);
         }
 
-        if (!isCardinalDirectionValid(cardinalDirection)) {
-            return false;
-        }
-
-        return isAngleValueValid(degrees, minutes, seconds, millis);
+        return isCardinalDirectionValid(cardinalDirection) && isAngleValueValid(degrees, minutes, seconds, millis);
     }
 
     private boolean isZeroCardinalDirection(CardinalDirection cardinalDirection) {
@@ -128,11 +119,7 @@ public enum GeographicCoordinateType {
             return (degrees >= 0) && isMinutesValid(minutes) && isSecondsValid(seconds) && isMillisValid(millis);
         }
 
-        if (degrees == maxValue) {
-            return (minutes == 0) && (seconds == 0) && (millis == 0);
-        }
-
-        return false;
+        return degrees == maxValue && minutes == 0 && seconds == 0 && millis == 0;
     }
 
     private boolean isMinutesValid(int minutes) {

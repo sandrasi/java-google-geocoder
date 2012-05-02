@@ -1,20 +1,12 @@
 package com.github.sandrasi.geocoder.coordinate;
 
-import static com.github.sandrasi.geocoder.coordinate.CardinalDirection.EAST;
-import static com.github.sandrasi.geocoder.coordinate.CardinalDirection.NORTH;
-import static com.github.sandrasi.geocoder.coordinate.CardinalDirection.SOUTH;
-import static com.github.sandrasi.geocoder.coordinate.CardinalDirection.WEST;
-import static com.github.sandrasi.geocoder.coordinate.CardinalDirection.ZERO_LATITUDE_DEGREE;
-import static com.github.sandrasi.geocoder.coordinate.CardinalDirection.ZERO_LONGITUDE_DEGREE;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-
 import java.math.BigDecimal;
 
 import org.junit.Test;
+
+import static com.github.sandrasi.geocoder.coordinate.CardinalDirection.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 public class GeographicCoordinateTest {
 
@@ -123,17 +115,17 @@ public class GeographicCoordinateTest {
         assertThat(geographicCoordinate.getDoubleValue(), is(-1.0341677777777778));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionIfLatitudeValueIsNull() {
         GeographicCoordinate.latitudeFromBigDecimal(null);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionIfLongitudeValueIsNull() {
         GeographicCoordinate.longitudeFromBigDecimal(null);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionIfCardinalDirectionIsNull() {
         GeographicCoordinate.fromAngle(1, 2, 3, 4, null);
     }

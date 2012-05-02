@@ -1,20 +1,15 @@
 package com.github.sandrasi.geocoder.google.v3;
 
-import static com.github.sandrasi.geocoder.components.GeocodeStatus.ZERO_RESULTS;
-import static org.easymock.EasyMock.anyObject;
-import static org.easymock.EasyMock.capture;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.verify;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URLEncoder;
 import java.util.Collections;
 
+import com.github.sandrasi.geocoder.GeocodeException;
+import com.github.sandrasi.geocoder.GeocodeResponse;
+import com.github.sandrasi.geocoder.components.GeocodedAddress;
+import com.github.sandrasi.geocoder.components.GeographicLocation;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
@@ -27,10 +22,10 @@ import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.github.sandrasi.geocoder.GeocodeException;
-import com.github.sandrasi.geocoder.GeocodeResponse;
-import com.github.sandrasi.geocoder.components.GeocodedAddress;
-import com.github.sandrasi.geocoder.components.GeographicLocation;
+import static com.github.sandrasi.geocoder.components.GeocodeStatus.*;
+import static org.easymock.EasyMock.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 public class GoogleGeocodeRequestTest {
 
@@ -53,7 +48,7 @@ public class GoogleGeocodeRequestTest {
                 .withRegionBiasing("us")
                 .withViewportBiasing(GeographicLocation.fromValues(0, 0), GeographicLocation.fromValues(1, 1))
                 .build();
-        Capture<HttpGet> capturedHttpGet = new Capture<HttpGet>();
+        Capture<HttpGet> capturedHttpGet = new Capture<>();
         HttpResponse httpResponse = EasyMock.createMock(HttpResponse.class);
         StatusLine statusLine = EasyMock.createMock(StatusLine.class);
         HttpEntity httpEntity = EasyMock.createMock(HttpEntity.class);
@@ -92,7 +87,7 @@ public class GoogleGeocodeRequestTest {
                 .withRegionBiasing("us")
                 .withViewportBiasing(GeographicLocation.fromValues(0, 0), GeographicLocation.fromValues(1, 1))
                 .build();
-        Capture<HttpGet> capturedHttpGet = new Capture<HttpGet>();
+        Capture<HttpGet> capturedHttpGet = new Capture<>();
         HttpResponse httpResponse = EasyMock.createMock(HttpResponse.class);
         StatusLine statusLine = EasyMock.createMock(StatusLine.class);
         HttpEntity httpEntity = EasyMock.createMock(HttpEntity.class);
@@ -181,27 +176,27 @@ public class GoogleGeocodeRequestTest {
         subject.execute();
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionIfAddressIsNullInBuilder() {
         googleGeocoder.newGeocodeRequestBuilder((String) null);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionIfSouthWestCornerIsSetToNullInBuilder() {
         googleGeocoder.newGeocodeRequestBuilder("address").withViewportBiasing(null, GeographicLocation.fromValues(0, 0));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionIfNorthEastCornerIsSetToNullInBuilder() {
         googleGeocoder.newGeocodeRequestBuilder("address").withViewportBiasing(GeographicLocation.fromValues(0, 0), null);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionIfRegionBiasIsSetToNullInBuilder() {
         googleGeocoder.newGeocodeRequestBuilder("address").withRegionBiasing(null);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionIfLanguageIsSetToNullInBuilder() {
         googleGeocoder.newGeocodeRequestBuilder("address").inLanguage(null);
     }

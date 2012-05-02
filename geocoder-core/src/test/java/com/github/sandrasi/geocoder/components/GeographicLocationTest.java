@@ -1,16 +1,12 @@
 package com.github.sandrasi.geocoder.components;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-
 import java.math.BigDecimal;
 
+import com.github.sandrasi.geocoder.coordinate.GeographicCoordinate;
 import org.junit.Test;
 
-import com.github.sandrasi.geocoder.coordinate.GeographicCoordinate;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 public class GeographicLocationTest {
 
@@ -27,17 +23,17 @@ public class GeographicLocationTest {
         assertThat(geographicLocationFromCoordinates.getElevation(), is(0.0));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionIfLatitudeIsNull() {
         GeographicLocation.fromCoordinates(null, GeographicCoordinate.longitudeFromDouble(-122.085099), new BigDecimal(0));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionIfLongitudeIsNull() {
         GeographicLocation.fromCoordinates(GeographicCoordinate.latitudeFromDouble(37.422782), null, new BigDecimal(0));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionIfElevationIsNull() {
         GeographicLocation.fromCoordinates(GeographicCoordinate.latitudeFromDouble(37.422782), GeographicCoordinate.longitudeFromDouble(-122.085099), null);
     }

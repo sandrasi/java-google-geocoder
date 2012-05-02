@@ -1,12 +1,9 @@
 package com.github.sandrasi.geocoder.components;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
+
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 public class GeographicAreaTest {
 
@@ -18,12 +15,12 @@ public class GeographicAreaTest {
         assertThat(geographicArea.getNorthEastCorner(), is(GeographicLocation.fromValues(1, 1)));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionIfSouthWestCornerIsNull() {
         new GeographicArea(null, GeographicLocation.fromValues(0, 0));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionIfNorthEastCornerIsNull() {
         new GeographicArea(GeographicLocation.fromValues(0, 0), null);
     }

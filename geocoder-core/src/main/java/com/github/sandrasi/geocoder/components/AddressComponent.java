@@ -6,10 +6,10 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.Validate;
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
  * An {@code AddressComponent} represents a small part of a complete address.
@@ -113,7 +113,7 @@ public final class AddressComponent implements Serializable {
      */
     public static final class Builder {
 
-        private final Set<AddressComponentType> addressComponentTypes = new TreeSet<AddressComponentType>();
+        private final Set<AddressComponentType> addressComponentTypes = new TreeSet<>();
         private String longName = "";
         private String shortName = "";
 

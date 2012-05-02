@@ -6,20 +6,19 @@ import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URLEncoder;
 
+import com.github.sandrasi.geocoder.GeocodeException;
+import com.github.sandrasi.geocoder.GeocodeRequest;
+import com.github.sandrasi.geocoder.GeocodeResponse;
+import com.github.sandrasi.geocoder.components.GeographicArea;
+import com.github.sandrasi.geocoder.components.GeographicLocation;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.Validate;
+import org.apache.commons.lang3.Validate;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.github.sandrasi.geocoder.GeocodeException;
-import com.github.sandrasi.geocoder.GeocodeRequest;
-import com.github.sandrasi.geocoder.GeocodeResponse;
-import com.github.sandrasi.geocoder.components.GeographicArea;
-import com.github.sandrasi.geocoder.components.GeographicLocation;
 
 /**
  * {@code GoogleGeocodeRequest} represents the parameterized URL to the Google Geocoding service.

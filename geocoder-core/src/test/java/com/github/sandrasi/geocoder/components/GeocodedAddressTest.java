@@ -1,22 +1,15 @@
 package com.github.sandrasi.geocoder.components;
 
-import static com.github.sandrasi.geocoder.components.AddressComponentType.COUNTRY;
-import static com.github.sandrasi.geocoder.components.AddressComponentType.ESTABLISHMENT;
-import static com.github.sandrasi.geocoder.components.AddressComponentType.LOCALITY;
-import static com.github.sandrasi.geocoder.components.AddressComponentType.POLITICAL;
-import static com.github.sandrasi.geocoder.components.AddressComponentType.STREET_ADDRESS;
-import static com.github.sandrasi.geocoder.components.LocationType.ROOFTOP;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import org.junit.Test;
+
+import static com.github.sandrasi.geocoder.components.AddressComponentType.*;
+import static com.github.sandrasi.geocoder.components.LocationType.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 public class GeocodedAddressTest {
 
@@ -131,18 +124,18 @@ public class GeocodedAddressTest {
         assertThat(geocodedAddress.getGeometry(), is(Geometry.newBuilder(GeographicLocation.fromValues(0, 0)).build()));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionIfFormattedAddressIsNullInBuilder() {
         GeocodedAddress.newBuilder(null);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionIfAddedAddressTypeIsNullInBuilder() {
         GeocodedAddress.newBuilder("1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA")
                 .addAddressType(null);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionIfAddedAddressTypesAreNullInBuilder() {
         GeocodedAddress.newBuilder("1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA")
                 .addAddressTypes(null);
@@ -154,13 +147,13 @@ public class GeocodedAddressTest {
                 .addAddressTypes(Arrays.asList((AddressComponentType) null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionIfAddedAddressComponentIsNullInBuilder() {
         GeocodedAddress.newBuilder("1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA")
                 .addAddressComponent(null);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionIfAddedAddressComponentsAreNullInBuilder() {
         GeocodedAddress.newBuilder("1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA")
                 .addAddressComponents(null);
@@ -172,7 +165,7 @@ public class GeocodedAddressTest {
                 .addAddressComponents(Arrays.asList((AddressComponent) null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionIfGeometryIsSetToNullInBuilder() {
         GeocodedAddress.newBuilder("1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA")
                 .setGeometry(null);

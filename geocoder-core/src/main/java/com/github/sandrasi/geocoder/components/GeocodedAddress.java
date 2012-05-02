@@ -1,24 +1,15 @@
 package com.github.sandrasi.geocoder.components;
 
-import static com.github.sandrasi.geocoder.coordinate.GeographicCoordinate.EQUATOR;
-import static com.github.sandrasi.geocoder.coordinate.GeographicCoordinate.PRIME_MERIDIAN;
-
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.TreeSet;
-
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.Validate;
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
+import java.util.*;
 
 import com.google.common.collect.Iterators;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
+import static com.github.sandrasi.geocoder.coordinate.GeographicCoordinate.*;
 
 /**
  * {@code GeocodedAddress} is the result of an address geocoding or location lookup.
@@ -176,7 +167,7 @@ public final class GeocodedAddress implements Serializable {
     }
 
     private List<AddressComponent> getUniqueAddressComponents() {
-        List<AddressComponent> uniqueAddressComponents = new ArrayList<AddressComponent>();
+        List<AddressComponent> uniqueAddressComponents = new ArrayList<>();
 
         for (List<AddressComponent> addressComponentList : addressComponents.values()) {
             for (AddressComponent addressComponent : addressComponentList) {
@@ -197,8 +188,8 @@ public final class GeocodedAddress implements Serializable {
     public static final class Builder {
 
         private final String formattedAddress;
-        private final Set<AddressComponentType> addressTypes = new TreeSet<AddressComponentType>();
-        private final Map<AddressComponentType, List<AddressComponent>> addressComponents = new TreeMap<AddressComponentType, List<AddressComponent>>();
+        private final Set<AddressComponentType> addressTypes = new TreeSet<>();
+        private final Map<AddressComponentType, List<AddressComponent>> addressComponents = new TreeMap<>();
         private Geometry geometry;
         private boolean partialMatch = false;
 
@@ -272,7 +263,7 @@ public final class GeocodedAddress implements Serializable {
                 List<AddressComponent> addressComponentsForASpecificType;
 
                 if (!addressComponents.containsKey(addressComponentType)) {
-                    addressComponentsForASpecificType = new ArrayList<AddressComponent>();
+                    addressComponentsForASpecificType = new ArrayList<>();
 
                     addressComponents.put(addressComponentType, addressComponentsForASpecificType);
                 } else {

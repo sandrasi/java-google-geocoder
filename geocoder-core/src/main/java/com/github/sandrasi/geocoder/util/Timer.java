@@ -1,6 +1,6 @@
 package com.github.sandrasi.geocoder.util;
 
-import org.apache.commons.lang.Validate;
+import org.apache.commons.lang3.Validate;
 
 /**
  * {@code Timer} can be used to put the current thread to a sleeping state. The length of the sleeping

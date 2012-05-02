@@ -1,9 +1,9 @@
 package com.github.sandrasi.geocoder.google.v3;
 
-import static org.junit.Assert.fail;
-
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 public class GoogleGeocoderFactoryTest {
 

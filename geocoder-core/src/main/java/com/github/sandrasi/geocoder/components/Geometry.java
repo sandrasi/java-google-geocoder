@@ -1,14 +1,13 @@
 package com.github.sandrasi.geocoder.components;
 
-import static com.github.sandrasi.geocoder.components.LocationType.APPROXIMATE;
-
 import java.io.Serializable;
 
-import org.apache.commons.lang.Validate;
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-
 import com.github.sandrasi.geocoder.coordinate.GeographicCoordinateType.CoordinateConstants;
+import org.apache.commons.lang3.Validate;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
+import static com.github.sandrasi.geocoder.components.LocationType.*;
 
 /**
  * {@code Geometry} represents geographic information about an address such as the location or

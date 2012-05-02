@@ -1,14 +1,10 @@
 package com.github.sandrasi.geocoder.components;
 
-import static com.github.sandrasi.geocoder.components.LocationType.APPROXIMATE;
-import static com.github.sandrasi.geocoder.components.LocationType.ROOFTOP;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
+
+import static com.github.sandrasi.geocoder.components.LocationType.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 public class GeometryTest {
 
@@ -57,24 +53,24 @@ public class GeometryTest {
         assertThat(geometry.getViewport(), is(new GeographicArea(GeographicLocation.fromValues(37.4196344, -122.0882466), GeographicLocation.fromValues(37.4259296, -122.0819514))));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionIfLocationIsNullInBuilder() {
         Geometry.newBuilder(null);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionIfLocationTypeIsSetToNullInBuilder() {
         Geometry.newBuilder(GeographicLocation.fromValues(37.422782, -122.085099))
                 .setLocationType(null);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionIfViewportIsSetToNullInBuilder() {
         Geometry.newBuilder(GeographicLocation.fromValues(37.422782, -122.085099))
                 .setViewport(null);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionIfBoundsIsSetToNullInBuilder() {
         Geometry.newBuilder(GeographicLocation.fromValues(37.422782, -122.085099))
                 .setBounds(null);

@@ -1,15 +1,14 @@
 package com.github.sandrasi.geocoder.google.v3;
 
-import static com.github.sandrasi.geocoder.components.GeocodeStatus.OK;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-
+import com.github.sandrasi.geocoder.GeocodeResponse;
+import com.github.sandrasi.geocoder.components.GeographicLocation;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.github.sandrasi.geocoder.GeocodeResponse;
-import com.github.sandrasi.geocoder.components.GeographicLocation;
+import static com.github.sandrasi.geocoder.components.GeocodeStatus.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 public class GoogleGeocodingTest {
 

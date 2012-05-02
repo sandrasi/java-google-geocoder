@@ -3,11 +3,10 @@ package com.github.sandrasi.geocoder.components;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-import org.apache.commons.lang.Validate;
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-
 import com.github.sandrasi.geocoder.coordinate.GeographicCoordinate;
+import org.apache.commons.lang3.Validate;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
  * {@code GeographicLocation} represents a point on the map with latitude and longitude coordinates and elevation.

@@ -1,19 +1,18 @@
 package com.github.sandrasi.geocoder.google.v3;
 
-import static com.github.sandrasi.geocoder.components.GeocodeStatus.INVALID_REQUEST;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.Validate;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-
 import com.github.sandrasi.geocoder.GeocodeResponse;
 import com.github.sandrasi.geocoder.components.GeocodeStatus;
 import com.github.sandrasi.geocoder.components.GeocodedAddress;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
+import static com.github.sandrasi.geocoder.components.GeocodeStatus.*;
 
 /**
  * {@code GoogleGeocodeResponse} represents the result of an address lookup or a reverse geocoding.
@@ -143,7 +142,7 @@ public final class GoogleGeocodeResponse implements GeocodeResponse, Serializabl
 
         private final String queryString;
         private GeocodeStatus geocodeStatus = INVALID_REQUEST;
-        private final List<GeocodedAddress> geocodedAddresses = new ArrayList<GeocodedAddress>();
+        private final List<GeocodedAddress> geocodedAddresses = new ArrayList<>();
 
         private Builder(String queryString) {
             Validate.notNull(queryString, "queryString is required");
