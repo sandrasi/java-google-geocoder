@@ -16,7 +16,7 @@
     </modules>
 
     <scm>
-        <connection>scm:git://github.com/sandrasi/Java-Google-Geocoder.git</connection>
+        <connection>scm:git://github.com/sandrasi/java-google-geocoder.git</connection>
     </scm>
 
     <properties>
