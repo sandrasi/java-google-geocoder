@@ -1,15 +1,20 @@
 package com.github.sandrasi.geocoder.components;
 
+import static com.github.sandrasi.geocoder.coordinate.GeographicCoordinate.*;
 import java.io.Serializable;
-import java.util.*;
-
-import com.google.common.collect.Iterators;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
+import com.github.sandrasi.geocoder.util.Iterators;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-
-import static com.github.sandrasi.geocoder.coordinate.GeographicCoordinate.*;
 
 /**
  * {@code GeocodedAddress} is the result of an address geocoding or location lookup.
@@ -62,7 +67,7 @@ public final class GeocodedAddress implements Serializable {
      * @return an address component type iterator
      */
     public Iterator<AddressComponentType> addressTypeIterator() {
-        return Iterators.unmodifiableIterator(addressTypes.iterator());
+        return Iterators.unmodifiable(addressTypes.iterator());
     }
 
     /**
@@ -88,9 +93,9 @@ public final class GeocodedAddress implements Serializable {
      */
     public Iterator<AddressComponent> addressComponentIterator(AddressComponentType addressComponentType) {
         if (addressComponents.containsKey(addressComponentType)) {
-            return Iterators.unmodifiableIterator(addressComponents.get(addressComponentType).iterator());
+            return Iterators.unmodifiable(addressComponents.get(addressComponentType).iterator());
         } else {
-            return Iterators.emptyIterator();
+            return Iterators.empty();
         }
     }
 
@@ -104,7 +109,7 @@ public final class GeocodedAddress implements Serializable {
      * @return an address component iterator
      */
     public Iterator<AddressComponent> addressComponentIterator() {
-        return Iterators.unmodifiableIterator(getUniqueAddressComponents().iterator());
+        return Iterators.unmodifiable(getUniqueAddressComponents().iterator());
     }
 
     /**
