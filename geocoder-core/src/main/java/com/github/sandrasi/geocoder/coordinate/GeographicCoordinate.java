@@ -1,14 +1,12 @@
 package com.github.sandrasi.geocoder.coordinate;
 
+import static com.github.sandrasi.geocoder.coordinate.CardinalDirection.*;
+import static com.github.sandrasi.geocoder.coordinate.GeographicCoordinateType.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-
-import static com.github.sandrasi.geocoder.coordinate.CardinalDirection.*;
-import static com.github.sandrasi.geocoder.coordinate.GeographicCoordinateType.*;
 
 /**
  * {@code GeographicCoordinate} represents a horizontal or vertical coordinate in
@@ -19,7 +17,7 @@ public final class GeographicCoordinate implements Serializable {
     private static final int NUMBER_OF_MINUTES_IN_AN_HOUR = 60;
     private static final int NUMBER_OF_SECONDS_IN_A_MINUTE = 60;
     private static final int NUMBER_OF_MILLIS_IN_A_SECOND = 1000;
-    private static final int ONE_HOUR_IN_MILLIS = 3600000;
+    private static final int ONE_HOUR_AS_MILLIS = 3600000;
 
     private static final long serialVersionUID = 1L;
 
@@ -75,7 +73,7 @@ public final class GeographicCoordinate implements Serializable {
         this.cardinalDirection = cardinalDirection;
         this.value = BigDecimal.valueOf(degrees)
                 .add(BigDecimal.valueOf((minutes * NUMBER_OF_SECONDS_IN_A_MINUTE + seconds) * NUMBER_OF_MILLIS_IN_A_SECOND + millis)
-                .divide(BigDecimal.valueOf(ONE_HOUR_IN_MILLIS), PRECISION, RoundingMode.HALF_EVEN))
+                .divide(BigDecimal.valueOf(ONE_HOUR_AS_MILLIS), PRECISION, RoundingMode.HALF_EVEN))
                 .multiply(BigDecimal.valueOf(((cardinalDirection == ZERO_LATITUDE_DEGREE) || (cardinalDirection == ZERO_LONGITUDE_DEGREE) || (cardinalDirection == NORTH) || (cardinalDirection == EAST)) ? 1 : -1));
     }
 
