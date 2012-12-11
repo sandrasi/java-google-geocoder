@@ -5,18 +5,17 @@ import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URLEncoder;
-
 import com.github.sandrasi.geocoder.GeocodeException;
 import com.github.sandrasi.geocoder.GeocodeRequest;
 import com.github.sandrasi.geocoder.GeocodeResponse;
 import com.github.sandrasi.geocoder.components.GeographicArea;
 import com.github.sandrasi.geocoder.components.GeographicLocation;
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -106,7 +105,7 @@ public final class GoogleGeocodeRequest implements GeocodeRequest, Serializable 
                 throw new GeocodeException("An error occurred while geocoding: "
                         + httpResponse.getStatusLine().getStatusCode()
                         + " " + httpResponse.getStatusLine().getReasonPhrase()
-                        + " " + IOUtils.toString(httpResponse.getEntity().getContent()));
+                        + " " + EntityUtils.toString(httpResponse.getEntity()));
             }
         } catch (ClientProtocolException e) {
             LOGGER.error("An HTTP protocol error occurred", e);
