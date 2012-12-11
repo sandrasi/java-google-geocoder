@@ -55,7 +55,7 @@ public class Iterators {
         }
 
         /**
-         * Always throws an UnsupportedOperationException
+         * Always throws an {@code UnsupportedOperationException}
          *
          * @throws UnsupportedOperationException
          */
