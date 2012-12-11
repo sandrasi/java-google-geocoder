@@ -18,7 +18,7 @@ public class GeographicArea implements Serializable {
     private final GeographicLocation northEastCorner;
 
     /**
-     * Constructs a new {@code GeographicAre} with the given coordinates.
+     * Constructs a new {@code GeographicArea} with the given coordinates.
      *
      * @param southWestCorner the lower left corner of the area
      * @param northEastCorner the upper right corner of the area
