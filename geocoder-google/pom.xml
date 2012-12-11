@@ -15,8 +15,8 @@
     <name>Google Geocoder v3</name>
 
     <properties>
-        <org.apache.httpcomponents.httpclient.version>4.1.1</org.apache.httpcomponents.httpclient.version>
-        <org.codehaus.jackson.version>1.8.3</org.codehaus.jackson.version>
+        <org.apache.httpcomponents.httpclient.version>4.2.2</org.apache.httpcomponents.httpclient.version>
+        <org.codehaus.jackson.version>1.9.11</org.codehaus.jackson.version>
     </properties>
 
     <dependencies>
