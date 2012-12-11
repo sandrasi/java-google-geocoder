@@ -45,7 +45,7 @@ public final class GoogleGeocoderFactory {
      * through the {@code httpClient}.
      *
      * @param httpClient an HTTP client to execute the HTTP request to the Google Geocode service
-     * @throws IllegalArgumentException if {@code httpClient} is {@code null}
+     * @throws NullPointerException if {@code httpClient} is {@code null}
      * @return a new instance of {@code GoogleGeocoder}
      */
     public static GoogleGeocoder createGoogleGeocoder(HttpClient httpClient) {
@@ -62,8 +62,10 @@ public final class GoogleGeocoderFactory {
      * Google Maps API. For more information see <a href="http://www.google.com/enterprise/earthmaps/maps.html">
      * Google Maps API Premier</a>.
      * @param googleMapsApiPremierKey the cryptographic key used to sign the premier Google Maps API Web Services requests
+     * @throws NullPointerException if either {@code googleMapsApiPremierClientId} or {@code googleMapsApiPremierKey}
+     * is {@code null}
      * @throws IllegalArgumentException if either {@code googleMapsApiPremierClientId} or
-     * {@code googleMapsApiPremierKey} is {@code null} or blank
+     * {@code googleMapsApiPremierKey} is blank
      * @return a new instance of {@code GoogleGeocoder}
      */
     public static GoogleGeocoder createPremierGoogleGeocoder(String googleMapsApiPremierClientId,
@@ -83,8 +85,10 @@ public final class GoogleGeocoderFactory {
      * Google Maps API. For more information see <a href="http://www.google.com/enterprise/earthmaps/maps.html">
      * Google Maps API Premier</a>.
      * @param googleMapsApiPremierKey the cryptographic key used to sign the premier Google Maps API Web Services requests
-     * @throws IllegalArgumentException if {@code httpClient} is {@code null}, or if either
-     * {@code googleMapsApiPremierClientId} or {@code googleMapsApiPremierKey} is {@code null} or blank
+     * @throws NullPointerException if either {@code httpClient} or {@code googleMapsApiPremierClientId} or
+     * {@code googleMapsApiPremierKey} is {@code null}
+     * @throws IllegalArgumentException if either {@code googleMapsApiPremierClientId} or {@code googleMapsApiPremierKey}
+     * is blank
      * @return a new instance of {@code GoogleGeocoder}
      */
     public static GoogleGeocoder createPremierGoogleGeocoder(HttpClient httpClient,
@@ -123,8 +127,10 @@ public final class GoogleGeocoderFactory {
      *
      * @param httpClient an HTTP client to execute the HTTP request to the Google Geocode service
      * @param geocodingRequestRateInMilliseconds the number of milliseconds between two consecutive geocoding requests
-     * @throws IllegalArgumentException if {@code httpClient} is {@code null}, or if either
-     * {@code googleMapsApiPremierClientId} or {@code googleMapsApiPremierKey} is {@code null} or blank,
+     * @throws NullPointerException if either {@code httpClient} or {@code googleMapsApiPremierClientId} or
+     * {@code googleMapsApiPremierKey} is {@code null}
+     * @throws IllegalArgumentException if either {@code googleMapsApiPremierClientId} or {@code googleMapsApiPremierKey}
+     * is blank,
      * or if {@code geocodingRequestRateInMilliseconds} is a negative number
      * @return a new instance of a timed {@code GoogleGeocoder}
      */
@@ -149,8 +155,10 @@ public final class GoogleGeocoderFactory {
      * Google Maps API Premier</a>.
      * @param googleMapsApiPremierKey the cryptographic key used to sign the premier Google Maps API Web Services requests
      * @param geocodingRequestRateInMilliseconds the minimum number of milliseconds between two consecutive geocoding requests
+     * @throws NullPointerException if either {@code googleMapsApiPremierClientId} or {@code googleMapsApiPremierKey}
+     * is {@code null}
      * @throws IllegalArgumentException if either {@code googleMapsApiPremierClientId} or {@code googleMapsApiPremierKey}
-     * is {@code null} or blank, or {@code geocodingRequestRateInMilliseconds} is a negative number
+     * is blank, or {@code geocodingRequestRateInMilliseconds} is a negative number
      * @return a new instance of a timed {@code GoogleGeocoder}
      */
     public static GoogleGeocoder createTimedPremierGoogleGeocoder(String googleMapsApiPremierClientId,
@@ -181,8 +189,10 @@ public final class GoogleGeocoderFactory {
      * Google Maps API Premier</a>.
      * @param googleMapsApiPremierKey the cryptographic key used to sign the premier Google Maps API Web Services requests
      * @param geocodingRequestRateInMilliseconds the number of milliseconds between two consecutive geocoding requests
-     * @throws IllegalArgumentException if {@code httpClient} is {@code null}, or if either
-     * {@code googleMapsApiPremierClientId} or {@code googleMapsApiPremierKey} is {@code null} or blank,
+     * @throws NullPointerException if either {@code httpClient} or {@code googleMapsApiPremierClientId} or
+     * {@code googleMapsApiPremierKey} is {@code null}
+     * @throws IllegalArgumentException if either {@code googleMapsApiPremierClientId} or {@code googleMapsApiPremierKey}
+     * is blank,
      * or if {@code geocodingRequestRateInMilliseconds} is a negative number
      * @return a new instance of a timed {@code GoogleGeocoder}
      */

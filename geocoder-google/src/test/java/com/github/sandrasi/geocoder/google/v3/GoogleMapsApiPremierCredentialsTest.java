@@ -1,13 +1,12 @@
 package com.github.sandrasi.geocoder.google.v3;
 
-import org.junit.Test;
-
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
+import org.junit.Test;
 
 public class GoogleMapsApiPremierCredentialsTest {
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionIfClientIdIsNull() {
         new GoogleMapsApiPremierCredentials(null, "foo");
     }
@@ -17,7 +16,7 @@ public class GoogleMapsApiPremierCredentialsTest {
         new GoogleMapsApiPremierCredentials("   ", "foo");
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void shouldThrowExceptionIfKeyIsNull() {
         new GoogleMapsApiPremierCredentials("johndoe", null);
     }

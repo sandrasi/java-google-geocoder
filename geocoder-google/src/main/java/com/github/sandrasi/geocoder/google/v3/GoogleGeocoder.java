@@ -38,8 +38,8 @@ public abstract class GoogleGeocoder implements Geocoder<GoogleGeocodeRequest, G
      *
      * @param httpClient an HTTP client to execute the HTTP request to the Google Geocode service
      * @param geocodingRequestRateInMilliseconds the minimum time between two consecutive geocoding requests
-     * @throws IllegalArgumentException if {@code httpClient} is {@code null} or
-     * {@code geocodingRequestRateInMilliseconds} is a negative number
+     * @throws NullPointerException if {@code httpClient} is {@code null}
+     * @throws IllegalArgumentException if {@code geocodingRequestRateInMilliseconds} is a negative number
      */
     protected GoogleGeocoder(HttpClient httpClient, long geocodingRequestRateInMilliseconds) {
         Validate.notNull(httpClient, "httpClient is required");
@@ -58,9 +58,9 @@ public abstract class GoogleGeocoder implements Geocoder<GoogleGeocodeRequest, G
      * @param httpClient an HTTP client to execute the HTTP request to the Google Geocode service
      * @param googleMapsApiPremierCredentials credentials for accessing the premier Google Maps API Web Services
      * @param geocodingRequestRateInMilliseconds the minimum time between two consecutive geocoding requests
-     * @throws IllegalArgumentException if either {@code httpClient} or
-     * {@code googleMapsApiPremierCrendentials} is {@code null}, or if
-     * {@code geocodingRequestRateInMilliseconds} is a negative number
+     * @throws NullPointerException if either {@code httpClient} or {@code googleMapsApiPremierCrendentials}
+     * is {@code null}
+     * @throws IllegalArgumentException if {@code geocodingRequestRateInMilliseconds} is a negative number
      */
     protected GoogleGeocoder(HttpClient httpClient, GoogleMapsApiPremierCredentials googleMapsApiPremierCredentials,
             long geocodingRequestRateInMilliseconds) {

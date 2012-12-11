@@ -48,7 +48,7 @@ final class JsonGeocodeResponseParser {
      *
      * @param originalQueryString the original query sent to the Google geocoding service
      * @param jsonInputStream the streamed geocode response in JSON format
-     * @throws IllegalArgumentException if {@code orignalQueryString} or {@code jsonInputStream} is {@code null}
+     * @throws NullPointerException if {@code orignalQueryString} or {@code jsonInputStream} is {@code null}
      * @throws GeocodeException if an I/O exception occurs during the parsing
      * @return a Google geocode response
      */

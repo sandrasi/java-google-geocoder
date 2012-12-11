@@ -1,10 +1,8 @@
 package com.github.sandrasi.geocoder.coordinate;
 
-import java.math.BigDecimal;
-
-import org.apache.commons.lang3.Validate;
-
 import static com.github.sandrasi.geocoder.coordinate.CardinalDirection.*;
+import java.math.BigDecimal;
+import org.apache.commons.lang3.Validate;
 
 /**
  * {@code GeographicCoordinateType} represents the latitude and longitude coordinate types.
@@ -37,7 +35,7 @@ public enum GeographicCoordinateType {
      * this coordinate type is longitude then the values allowed are between -180.0 and 180.0.
      *
      * @param value the floating point value of the angular distance
-     * @throws IllegalArgumentException if {@code value} is {@code null}
+     * @throws NullPointerException if {@code value} is {@code null}
      * @return {@code true} if {@code value} is between the range specific to this
      * coordinate type; {@code false} otherwise
      */
@@ -73,7 +71,7 @@ public enum GeographicCoordinateType {
      * @param seconds the seconds of the angle
      * @param millis the millis of the angle
      * @param cardinalDirection the cardinal direction of the given angle
-     * @throws IllegalArgumentException if {@code cardinalDirection} is {@code null}
+     * @throws NullPointerException if {@code cardinalDirection} is {@code null}
      * @return {@code true} if angle is between the range specific to this coordinate type;
      * {@code false} otherwise
      */

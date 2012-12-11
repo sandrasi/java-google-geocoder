@@ -188,7 +188,7 @@ public final class GoogleGeocodeRequest implements GeocodeRequest, Serializable 
          *
          * @param southWestCorner the southwest coordinate of the bounding box
          * @param northEastCorner the northeast coordinate of the bounding box
-         * @throws IllegalArgumentException if either {@code southWestCorner} or {@code northEastCorner} is {@code null}
+         * @throws NullPointerException if either {@code southWestCorner} or {@code northEastCorner} is {@code null}
          * @return a reference to this {@code Builder}
          */
         public Builder withViewportBiasing(GeographicLocation southWestCorner, GeographicLocation northEastCorner) {
@@ -206,7 +206,7 @@ public final class GoogleGeocodeRequest implements GeocodeRequest, Serializable 
          * Region Biasing</a>.</i>
          *
          * @param regionBias the region code, specified as a ccTLD ("top-level domain") two-character value
-         * @throws IllegalArgumentException if {@code regionBias} is {@code null}
+         * @throws NullPointerException if {@code regionBias} is {@code null}
          * @return a reference to this {@code Builder}
          */
         public Builder withRegionBiasing(String regionBias) {
@@ -225,7 +225,7 @@ public final class GoogleGeocodeRequest implements GeocodeRequest, Serializable 
          * Note that Google often updates the supported languages so this list may not be exhaustive.</i>
          *
          * @param language the language code
-         * @throws IllegalArgumentException if {@code language} is {@code null}
+         * @throws NullPointerException if {@code language} is {@code null}
          * @return a reference to this {@code Builder}
          */
         public Builder inLanguage(String language) {

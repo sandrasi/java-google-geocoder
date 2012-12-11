@@ -1,18 +1,16 @@
 package com.github.sandrasi.geocoder.google.v3;
 
+import static com.github.sandrasi.geocoder.components.GeocodeStatus.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import com.github.sandrasi.geocoder.GeocodeResponse;
 import com.github.sandrasi.geocoder.components.GeocodeStatus;
 import com.github.sandrasi.geocoder.components.GeocodedAddress;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-
-import static com.github.sandrasi.geocoder.components.GeocodeStatus.*;
 
 /**
  * {@code GoogleGeocodeResponse} represents the result of an address lookup or a reverse geocoding.
@@ -39,7 +37,7 @@ public final class GoogleGeocodeResponse implements GeocodeResponse, Serializabl
      *
      * @param queryString the original address or textual latitude / longitude values used in
      * the geocoding request
-     * @throws IllegalArgumentException if {@code queryString} is {@code null}
+     * @throws NullPointerException if {@code queryString} is {@code null}
      * @return a new instance of {@link GoogleGeocodeResponse.Builder}
      */
     public static Builder newBuilder(String queryString) {
@@ -165,7 +163,7 @@ public final class GoogleGeocodeResponse implements GeocodeResponse, Serializabl
          * Sets the status in the response built by this builder.
          *
          * @param geocodeStatus the status of the geocoding
-         * @throws IllegalArgumentException if {@code geocodeStatus} is {@code null}
+         * @throws NullPointerException if {@code geocodeStatus} is {@code null}
          * @return a reference to this {@code Builder}
          */
         public Builder setGeocodeStatus(GeocodeStatus geocodeStatus) {
@@ -180,7 +178,7 @@ public final class GoogleGeocodeResponse implements GeocodeResponse, Serializabl
          * Adds the given geocoded address to the list of geocoded addresses in the response built by this builder.
          *
          * @param geocodedAddress a geocoded address
-         * @throws IllegalArgumentException if {@code geocodedAddress} is {@code null}
+         * @throws NullPointerException if {@code geocodedAddress} is {@code null}
          * @return a reference to this {@code Builder}
          */
         public Builder addGeocodedAddress(GeocodedAddress geocodedAddress) {
@@ -195,8 +193,8 @@ public final class GoogleGeocodeResponse implements GeocodeResponse, Serializabl
          * Adds all of the geocoded addresses to the list of geocoded addresses in the response built by this builder.
          *
          * @param geocodedAddresses a list of geocoded address
-         * @throws IllegalArgumentException if {@code geocodedAddresses} is {@code null} or if it contains {@code null}
-         * elements
+         * @throws NullPointerException if {@code geocodedAddresses} is {@code null}
+         * @throws IllegalArgumentException if any element of {@code geocodedAddresses} is {@code null}
          * @return a reference to this {@code Builder}
          */
         public Builder addGeocodedAddresses(List<GeocodedAddress> geocodedAddresses) {

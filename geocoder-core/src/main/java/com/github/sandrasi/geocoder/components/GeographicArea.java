@@ -22,7 +22,7 @@ public class GeographicArea implements Serializable {
      *
      * @param southWestCorner the lower left corner of the area
      * @param northEastCorner the upper right corner of the area
-     * @throws IllegalArgumentException if {@code southWestCorner} or {@code northEastCorner} is {@code null}
+     * @throws NullPointerException if {@code southWestCorner} or {@code northEastCorner} is {@code null}
      */
     public GeographicArea(GeographicLocation southWestCorner, GeographicLocation northEastCorner) {
         Validate.notNull(southWestCorner, "southWestCorner is required");

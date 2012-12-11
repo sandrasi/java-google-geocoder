@@ -5,10 +5,8 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
-
 import com.github.sandrasi.geocoder.GeocodeException;
 import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
 /**
@@ -29,12 +27,12 @@ public class GoogleMapsApiPremierCredentials {
      * Google Maps API. For more information see <a href="http://www.google.com/enterprise/earthmaps/maps.html">
      * Google Maps API Premier</a>.
      * @param key the cryptographic key used to sign the premier Google Maps API Web Services requests
-     * @throws IllegalArgumentException if either {@code clientId} or {@code key} is {@code null}
-     * or blank
+     * @throws NullPointerException if either {@code clientId} or {@code key} is {@code null}
+     * @throws IllegalArgumentException if either {@code clientId} or {@code key} blank
      */
     public GoogleMapsApiPremierCredentials(String clientId, String key) {
-        Validate.isTrue(!StringUtils.isBlank(clientId), "clientId is required and must not be blank");
-        Validate.isTrue(!StringUtils.isBlank(key), "key is required and must not be blank");
+        Validate.notBlank(clientId, "clientId is required and must not be blank");
+        Validate.notBlank(key, "key is required and must not be blank");
 
         try {
             this.clientId = clientId;
@@ -58,7 +56,7 @@ public class GoogleMapsApiPremierCredentials {
      *
      * @param string the string to sign
      * @return the HMAC-SHA1 encoded signature
-     * @throws IllegalArgumentException if {@code string} is {@code null}
+     * @throws NullPointerException if {@code string} is {@code null}
      */
     public String getSignatureFor(String string) {
         Validate.notNull(string, "string is required");

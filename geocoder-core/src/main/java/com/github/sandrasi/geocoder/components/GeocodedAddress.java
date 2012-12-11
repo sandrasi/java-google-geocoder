@@ -41,7 +41,7 @@ public final class GeocodedAddress implements Serializable {
      * Creates a new geocoded address builder with the specified formatted address.
      *
      * @param formattedAddress the address formatted by the geocoding service
-     * @throws IllegalArgumentException if {@code formattedAddress} is {@code null}
+     * @throws NullPointerException if {@code formattedAddress} is {@code null}
      * @return a new instance of {@link GeocodedAddress.Builder}
      */
     public static Builder newBuilder(String formattedAddress) {
@@ -226,7 +226,7 @@ public final class GeocodedAddress implements Serializable {
          * this builder.
          *
          * @param addressType the type of the geocoded address
-         * @throws IllegalArgumentException if {@code addressType} is {@code null}
+         * @throws NullPointerException if {@code addressType} is {@code null}
          * @return a reference to this {@code Builder}
          */
         public Builder addAddressType(AddressComponentType addressType) {
@@ -242,7 +242,8 @@ public final class GeocodedAddress implements Serializable {
          * builder.
          *
          * @param addressTypes the types of the geocoded address
-         * @throws IllegalArgumentException if {@code addressTypes} or any of its elements is {@code null}
+         * @throws NullPointerException if {@code addressTypes} is {@code null}
+         * @throws IllegalArgumentException if any element of {@code addressTypes} is {@code null}
          * @return a reference to this {@code Builder}
          */
         public Builder addAddressTypes(List<AddressComponentType> addressTypes) {
@@ -258,7 +259,7 @@ public final class GeocodedAddress implements Serializable {
          * builder.
          *
          * @param addressComponent an address component
-         * @throws IllegalArgumentException if {@code addressComponent} is {@code null}
+         * @throws NullPointerException if {@code addressComponent} is {@code null}
          * @return a reference to this {@code Builder}
          */
         public Builder addAddressComponent(AddressComponent addressComponent) {
@@ -286,8 +287,8 @@ public final class GeocodedAddress implements Serializable {
          * by this builder.
          *
          * @param addressComponents the components of the geocoded address
-         * @throws IllegalArgumentException if {@code addressComponents} or any of its elements
-         * is {@code null}
+         * @throws NullPointerException if {@code addressComponents} is {@code null}
+         * @throws IllegalArgumentException if any element of {@code addressComponents} is {@code null}
          * @return a reference to this {@code Builder}
          */
         public Builder addAddressComponents(List<AddressComponent> addressComponents) {
@@ -304,7 +305,7 @@ public final class GeocodedAddress implements Serializable {
          * Sets the geometry information of the geocoded address built by this builder.
          *
          * @param geometry the geometry of the geocoded address
-         * @throws IllegalArgumentException if {@code geometry} is {@code null}
+         * @throws NullPointerException if {@code geometry} is {@code null}
          * @return a reference to this {@code Builder}
          */
         public Builder setGeometry(Geometry geometry) {

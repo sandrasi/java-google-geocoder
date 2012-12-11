@@ -62,7 +62,7 @@ public final class GeographicLocation implements Serializable {
      *
      * @param latitude the geographic latitude of the location
      * @param longitude the geographic longitude of the location
-     * @throws IllegalArgumentException if {@code latitude} or {@code longitude} is {@code null}
+     * @throws NullPointerException if {@code latitude} or {@code longitude} is {@code null}
      */
     public static GeographicLocation fromCoordinates(GeographicCoordinate latitude, GeographicCoordinate longitude) {
         return fromCoordinates(latitude, longitude, BigDecimal.ZERO);
@@ -74,7 +74,7 @@ public final class GeographicLocation implements Serializable {
      * @param latitude the geographic latitude of the location
      * @param longitude the geographic longitude of the location
      * @param elevation the elevation of the location
-     * @throws IllegalArgumentException if any of {@code latitude}, {@code longitude} or {@code elevation} is {@code null}
+     * @throws NullPointerException if any of {@code latitude}, {@code longitude} or {@code elevation} is {@code null}
      */
     public static GeographicLocation fromCoordinates(GeographicCoordinate latitude, GeographicCoordinate longitude, BigDecimal elevation) {
         Validate.notNull(latitude, "latitude is required");

@@ -1,13 +1,11 @@
 package com.github.sandrasi.geocoder.components;
 
+import static com.github.sandrasi.geocoder.components.LocationType.*;
 import java.io.Serializable;
-
 import com.github.sandrasi.geocoder.coordinate.GeographicCoordinateType.CoordinateConstants;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-
-import static com.github.sandrasi.geocoder.components.LocationType.*;
 
 /**
  * {@code Geometry} represents geographic information about an address such as the location or
@@ -33,7 +31,7 @@ public final class Geometry implements Serializable {
      * Creates a new geometry-builder with the specified geographic location.
      *
      * @param location the geographic location represented by the geometry built by the builder
-     * @throws IllegalArgumentException if {@code location} is {@code null}
+     * @throws NullPointerException if {@code location} is {@code null}
      * @return a new instance of {@link Geometry.Builder}
      */
     public static Builder newBuilder(GeographicLocation location) {
@@ -155,7 +153,7 @@ public final class Geometry implements Serializable {
          * Sets the type of the location in the geometry built by this builder.
          *
          * @param locationType the type of the location
-         * @throws IllegalArgumentException if {@code locationType} is {@code null}
+         * @throws NullPointerException if {@code locationType} is {@code null}
          * @return a reference to this {@code Builder}
          */
         public Builder setLocationType(LocationType locationType) {
@@ -173,7 +171,7 @@ public final class Geometry implements Serializable {
          * the viewport.
          *
          * @param viewport the recommended viewport to best display the location
-         * @throws IllegalArgumentException if {@code viewport} is {@code null}
+         * @throws NullPointerException if {@code viewport} is {@code null}
          * @return a reference to this {@code Builder}
          */
         public Builder setViewport(GeographicArea viewport) {
@@ -192,7 +190,7 @@ public final class Geometry implements Serializable {
          * Sets the bounding box in the geometry built by this builder.
          *
          * @param bounds the bounding box that fully contains the location
-         * @throws IllegalArgumentException if {@code bounds} are {@code null}
+         * @throws NullPointerException if {@code bounds} are {@code null}
          * @return a reference to this {@code Builder}
          */
         public Builder setBounds(GeographicArea bounds) {

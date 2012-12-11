@@ -81,8 +81,8 @@ public final class GeographicCoordinate implements Serializable {
      * Creates a new horizontal coordinate from the given floating point {@code value}
      *
      * @param value the floating point value of the horizontal coordinate
-     * @throws IllegalArgumentException if {@code value} is {@code null} or it is
-     * not a valid latitude coordinate
+     * @throws NullPointerException if {@code value} is {@code null}
+     * @throws IllegalArgumentException if {@code value} is not a valid latitude coordinate
      * @return a new instance of {@code GeographicCoordinate}
      */
     public static GeographicCoordinate latitudeFromBigDecimal(BigDecimal value) {
@@ -93,8 +93,8 @@ public final class GeographicCoordinate implements Serializable {
      * Creates a new vertical coordinate from the given floating point {@code value}.
      *
      * @param value the floating point value of the vertical coordinate
-     * @throws IllegalArgumentException if {@code value} is {@code null} or it is
-     * not a valid longitude coordinate
+     * @throws NullPointerException if {@code value} is {@code null}
+     * @throws IllegalArgumentException if {@code value} is not a valid longitude coordinate
      * @return a new instance of {@code GeographicCoordinate}
      */
     public static GeographicCoordinate longitudeFromBigDecimal(BigDecimal value) {
@@ -158,8 +158,8 @@ public final class GeographicCoordinate implements Serializable {
      * @param seconds the seconds of the angle
      * @param millis the millis of the angle
      * @param cardinalDirection the cardinal direction of the angle
-     * @throws IllegalArgumentException if {@code cardinalDirection} is {@code null} or the
-     * given angle components and direction do not compose a valid coordinate together
+     * @throws NullPointerException if {@code cardinalDirection} is {@code null}
+     * @throws IllegalArgumentException if the given angle components and direction do not compose a valid coordinate together
      * @return a new instance of {@code GeographicCoordinate}
      */
     public static GeographicCoordinate fromAngle(int degrees, int minutes, int seconds, int millis, CardinalDirection cardinalDirection) {

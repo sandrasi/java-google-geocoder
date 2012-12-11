@@ -33,7 +33,7 @@ public final class AddressComponent implements Serializable {
      * Creates a new address component builder with the specified address compoenent type.
      *
      * @param addressComponentType the type of the address component built by the builder
-     * @throws IllegalArgumentException if {@code addressComponentType} is {@code null}
+     * @throws NullPointerException if {@code addressComponentType} is {@code null}
      * @return a new instance of {@link AddressComponent.Builder}
      */
     public static Builder newBuilder(AddressComponentType addressComponentType) {
@@ -138,7 +138,7 @@ public final class AddressComponent implements Serializable {
          * built by this builder.
          *
          * @param addressComponentType the type of the address component
-         * @throws IllegalArgumentException if {@code addressComponentType} is {@code null}
+         * @throws NullPointerException if {@code addressComponentType} is {@code null}
          * @return a reference to this {@code Builder}
          */
         public Builder addAddressComponentType(AddressComponentType addressComponentType) {
@@ -154,8 +154,8 @@ public final class AddressComponent implements Serializable {
          * built by this builder.
          *
          * @param addressComponentTypes the types of the address component
-         * @throws IllegalArgumentException if {@code addressComponentTypes} or any of its elements
-         * is {@code null}
+         * @throws NullPointerException if {@code addressComponentTypes} is {@code null}
+         * @throws IllegalArgumentException if any element of {@code addressComponentTypes} is {@code null}
          * @return a reference to this {@code Builder}
          */
         public Builder addAddressComponentTypes(Collection<AddressComponentType> addressComponentTypes) {
@@ -170,7 +170,7 @@ public final class AddressComponent implements Serializable {
          * Sets the full name of the address component built by this builder.
          *
          * @param longName the full name of the address component
-         * @throws IllegalArgumentException if {@code longName} is {@code null}
+         * @throws NullPointerException if {@code longName} is {@code null}
          * @return a reference to this {@code Builder}
          */
         public Builder setLongName(String longName) {
@@ -185,7 +185,7 @@ public final class AddressComponent implements Serializable {
          * Sets the short name of the address component built by this builder.
          *
          * @param shortName the short name of the address component
-         * @throws IllegalArgumentException if {@code shortName} is {@code null}
+         * @throws NullPointerException if {@code shortName} is {@code null}
          * @return a reference to this {@code Builder}
          */
         public Builder setShortName(String shortName) {
