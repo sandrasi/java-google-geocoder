@@ -14,12 +14,12 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  */
 public final class GeographicCoordinate implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     private static final int NUMBER_OF_MINUTES_IN_AN_HOUR = 60;
     private static final int NUMBER_OF_SECONDS_IN_A_MINUTE = 60;
     private static final int NUMBER_OF_MILLIS_IN_A_SECOND = 1000;
     private static final int ONE_HOUR_AS_MILLIS = 3600000;
-
-    private static final long serialVersionUID = 1L;
 
     /**
      * The horizontal coordinate representing the Equator
